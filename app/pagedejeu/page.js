@@ -3,12 +3,11 @@
 import { useEffect, useState } from 'react';
 import { getImagesByKeyword } from '../../services/pexelsService';
 import Image from 'next/image';
-
+import Navbar from '../components/Navbar';
 
 const GamePage = () => {
   const [images, setImages] = useState([]);
-  const [keyword, setKeyword] = useState('nature'); 
-
+  const [keyword, setKeyword] = useState('nature'); // Exemple de mot-clé
 
   useEffect(() => {
     const fetchImages = async () => {
