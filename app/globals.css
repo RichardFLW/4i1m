@@ -2,3 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
+h1 {
+  color: black;
+  margin-top: 25px;
+}
+
+/* Navbar */
+.navbar {
+  background-color: red;
+  width: 100vw;
+  height: 8vh;
+}
+
+/* main */
+main {
+  height: 92vh;
+  width: 100vw;
+  display: flex;
+}
+
+.left-section {
+  height: 100vh;
+  width: 50vw;
+  padding: 30px;
+}
+
+.right-section {
+  height: 100vh;
+  min-width: 50vw;
+  display: flex;
+}
