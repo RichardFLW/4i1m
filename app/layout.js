@@ -1,20 +1,26 @@
-import { Inter } from "next/font/google";
-import "./globals.css";
-import Navbar from "./components/Navbar";
+// app/layout.js or app/layout.tsx
 
-const inter = Inter({ subsets: ["latin"] });
+import Navbar from './components/Navbar';
+import './globals.css';
+import { Raleway, Merriweather } from 'next/font/google';
 
-export const metadata = {
-  title: "4i1m",
-  description: "Célébre jeu, trouve 1 mot à partir de 4 images",
-};
+const raleway = Raleway({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-raleway",
+});
+
+const merriweather = Merriweather({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-merriweather",
+});
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="fr">
-      <body className={inter.className}>
-        <Navbar />
-        {children}</body>
+    <html lang="en" className={`${raleway.variable} ${merriweather.variable}`}>
+      <body>
+        <Navbar/>{children}</body>
     </html>
   );
 }

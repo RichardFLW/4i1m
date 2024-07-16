@@ -1,0 +1,110 @@
+/* app/page.module.css */
+.main {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  @media (min-width: 1024px) {
+    .main {
+      flex-direction: row;
+    }
+  }
+  
+  .leftSection {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f3f4f6;
+    padding: 2rem;
+  }
+  
+  .textContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+  }
+  
+  @media (min-width: 1024px) {
+    .textContainer {
+      margin: 0;
+    }
+  }
+  
+  .title {
+    font-size: 1.875rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: black;
+  }
+  
+  @media (min-width: 768px) {
+    .title {
+      font-size: 2.25rem;
+    }
+  }
+  
+  .highlight {
+    color: #0049ff;
+  }
+  
+  .description {
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: black;
+  }
+  
+  @media (min-width: 768px) {
+    .description {
+      font-size: 1.125rem;
+    }
+  }
+  
+  .button {
+    padding: 0.75rem 1.5rem;
+    background-color: #0049ff;
+    color: white;
+    border-radius: 9999px;
+    text-align: center;
+    margin: 1rem auto;  /* Add some margin above the button for spacing */
+    width: fit-content;
+    display: block;
+    transition: background-color 0.3s;
+  }
+  
+  @media (min-width: 1024px) {
+    .button {
+      margin: 0;
+    }
+  }
+  
+  .button:hover {
+    background-color: #003bb5;
+  }
+  
+  .rightSection {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    padding: 1rem;
+    background-color: #f3f4f6;
+    height: 80vh;
+  }
+  
+  .imageContainer {
+    position: relative;
+    padding-bottom: 70%;
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+  
+  .image {
+    border-radius: 0.5rem;
+  }
+  

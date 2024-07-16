@@ -1,6 +1,6 @@
 // app/components/Navbar.js
 
-"use client"
+"use client";
 import React, { useState } from "react";
 import { FaHome, FaGamepad, FaChartBar, FaBars, FaTimes } from "react-icons/fa";
 import Link from "next/link";
@@ -45,16 +45,6 @@ const Navbar = () => {
               }`}
             >
               <FaGamepad className="mr-2" /> Le Jeu
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/stats"
-              className={`${styles.menuItem} ${
-                pathname === "/stats" ? styles.menuItemActive : ""
-              }`}
-            >
-              <FaChartBar className="mr-2" /> Stats
             </Link>
           </li>
         </ul>

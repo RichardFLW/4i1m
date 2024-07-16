@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import { getImagesByKeyword } from '../../services/pexelsService';
 import Image from 'next/image';
-import Navbar from '../components/Navbar';
 
 const GamePage = () => {
   const [images, setImages] = useState([]);

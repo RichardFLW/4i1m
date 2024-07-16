@@ -1,41 +1,83 @@
-import Link from 'next/link';
-import Image from 'next/image';
-import Head from 'next/head';
-import { roboto_mono } from '../Config/fonts'
+// app/page.js
+
+"use client";
+import Image from "next/image";
+import Link from "next/link";
+import styles from "./page.module.css";
+import { Raleway, Merriweather } from "next/font/google";
+import "./globals.css";
+
+// Importer les polices avec les poids spécifiés
+const raleway = Raleway({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-raleway",
+});
+const merriweather = Merriweather({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-merriweather",
+});
 
 export default function Home() {
   return (
-    <>
-      <Head>
-        <title>4 Images pour 1 Mot - Jeu de Devinettes</title>
-        <meta name="description" content="Essayez de deviner le mot à partir de 4 images dans ce jeu amusant et stimulant !" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-      <main className="">
-        <section className="left-section">
-          <h1 className="text-5xl font-bold mb-5 {roboto_mono.className}">Bienvenue sur 4 Images pour 1 Mot</h1>
-          <p className="text-lg mb-5">
-            Essayez de deviner le mot à partir de 4 images dans ce jeu amusant et stimulant. Cliquez sur le bouton ci-dessous pour commencer à jouer !
-          </p>
-          <Link href="/pagedejeu" className="bg-black hover:bg-white hover:text-black text-white font-bold py-3 px-6 rounded-lg transition duration-300">
-              Jouer
-          </Link>
+    <div className={`${raleway.variable} ${merriweather.variable}`}>
+      <main className={styles.main}>
+        <section className={styles.leftSection}>
+          <div className={styles.textContainer}>
+            <h1 className={styles.title}>
+              Bienvenue sur <span className={styles.highlight}>4 Images</span>{" "}
+              pour <span className={styles.highlight}>1 Mot</span>
+            </h1>
+            <p className={styles.description}>
+              Essayez de deviner le mot à partir de 4 images dans ce jeu amusant
+              et stimulant. Cliquez sur le bouton ci-dessous pour commencer à
+              jouer !
+            </p>
+            <Link href="/jeu" passHref>
+              <button className={styles.button}>Jouer</button>
+            </Link>
+          </div>
         </section>
-        <section className="right-section">
-          <div className="max-w-xs mx-4 mb-8">
-            <Image src="/pexels-shamia-casiano-183672-944743.jpg" alt="Exemple d'image" width={200} height={200} className="rounded-lg shadow-lg" />
+        <section className={styles.rightSection}>
+          <div className={styles.imageContainer}>
+            <Image
+              src="/pexels-nord6-796504.jpg"
+              alt="Image 1"
+              fill
+              style={{ objectFit: "cover" }}
+              className={styles.image}
+            />
           </div>
-          <div className="max-w-xs mx-4 mb-8">
-            <Image src="/pexels-leeloothefirst-5245218.jpg" alt="Exemple d'image" width={200} height={200} className="rounded-lg shadow-lg" />
+          <div className={styles.imageContainer}>
+            <Image
+              src="/pexels-nord6-792416.jpg"
+              alt="Image 2"
+              fill
+              style={{ objectFit: "cover" }}
+              className={styles.image}
+            />
           </div>
-          <div className="max-w-xs mx-4 mb-8">
-            <Image src="/pexels-anntarazevich-8016930.jpg" alt="Exemple d'image" width={200} height={200} className="rounded-lg shadow-lg" />
+          <div className={styles.imageContainer}>
+            <Image
+              src="/pexels-gael-dupont-langevin-374582892-16121200.jpg"
+              alt="Image 3"
+              fill
+              style={{ objectFit: "cover" }}
+              className={styles.image}
+            />
           </div>
-          <div className="max-w-xs mx-4 mb-8">
-            <Image src="/pexels-leeloothefirst-7173738.jpg" alt="Exemple d'image" width={200} height={200} className="rounded-lg shadow-lg" />
+          <div className={styles.imageContainer}>
+            <Image
+              src="/pexels-pixabay-54108.jpg"
+              alt="Image 4"
+              fill
+              style={{ objectFit: "cover" }}
+              className={styles.image}
+            />
           </div>
         </section>
       </main>
-    </>
+    </div>
   );
 }
