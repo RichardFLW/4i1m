@@ -1,0 +1,10 @@
+apple,pomme
+banana,banane
+cherry,cerise
+dog,chien
+cat,chat
+house,maison
+car,voiture
+tree,arbre
+sky,ciel
+water,eau

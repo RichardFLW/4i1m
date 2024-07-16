@@ -1,0 +1,11 @@
+.page{
+    height: 80vh;
+    width:100%;
+    background-color: rgb(218, 31, 31);
+}
+
+.img1{
+    height: 100px;
+    width: 100px;
+    background-color: blue;
+}
