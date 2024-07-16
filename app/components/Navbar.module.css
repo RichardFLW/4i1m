@@ -1,0 +1,58 @@
+/* app/components/Navbar.module.css */
+.navbar {
+    background-color: white;
+    color: black;
+    padding: 1rem;
+  }
+  
+  .navbarContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .menuButton {
+    display: block;
+  }
+  
+  @media (min-width: 1024px) {
+    .menuButton {
+      display: none;
+    }
+  }
+  
+  .menuItems {
+    display: none;
+  }
+  
+  @media (min-width: 1024px) {
+    .menuItems {
+      display: flex;
+      gap: 1rem;
+    }
+  }
+  
+  .menuItemsOpen {
+    display: block;
+    position: absolute;
+    top: 4rem;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    color: black;
+    padding: 1rem;
+    z-index: 10;
+  }
+  
+  .menuItem {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+  }
+  
+  .menuItemActive {
+    background-color: #0049ff;
+    color: white;
+  }
+  
