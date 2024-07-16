@@ -12,7 +12,7 @@ const PexelsImages = () => {
   const [images, setImages] = useState([]);
   
   // État pour stocker la requête de recherche, par défaut 'nature'
-  const [searchQuery, setSearchQuery] = useState('honey');
+  const [searchQuery, setSearchQuery] = useState('bee');
   
   // État pour stocker les valeurs d'entrée pour chaque lettre du mot à deviner
   const [inputValues, setInputValues] = useState(Array(6).fill(''));
@@ -77,8 +77,6 @@ const PexelsImages = () => {
         }
       }
       setInputValues(newInputValues);
-    } else if (key === 'SPACE') {
-      // Logique pour la touche espace si nécessaire
     } else {
       // Ajout de la lettre pressée dans le tableau des valeurs d'entrée
       const newInputValues = [...inputValues];

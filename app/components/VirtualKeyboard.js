@@ -9,7 +9,7 @@ const VirtualKeyboard = ({ correctWord, onKeyPress }) => {
   // useEffect pour générer les touches en fonction du mot correct
   useEffect(() => {
     const generateKeys = () => {
-      const letters = correctWord.split('');
+      const letters = correctWord.toUpperCase().split('');
       const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
       const availableKeys = new Set([...letters]);
 
@@ -26,27 +26,40 @@ const VirtualKeyboard = ({ correctWord, onKeyPress }) => {
 
   return (
     <div className="keyboard">
-      {keys.map((key, index) => (
+      <div className="keyboard-row">
+        {keys.slice(0, 7).map((key, index) => (
+          <button
+            key={index}
+            className="key"
+            onClick={() => onKeyPress(key)}
+          >
+            {key}
+          </button>
+        ))}
         <button
-          key={index}
-          className="key"
-          onClick={() => onKeyPress(key)}
+          className="key action-key"
+          onClick={() => onKeyPress('BACKSPACE')}
         >
-          {key}
+          ⌫
         </button>
-      ))}
-      <button
-        className="key"
-        onClick={() => onKeyPress('BACKSPACE')}
-      >
-        ⌫
-      </button>
-      <button
-        className="key"
-        onClick={() => onKeyPress('SPACE')}
-      >
-        Espace
-      </button>
+      </div>
+      <div className="keyboard-row">
+        {keys.slice(7).map((key, index) => (
+          <button
+            key={index}
+            className="key"
+            onClick={() => onKeyPress(key)}
+          >
+            {key}
+          </button>
+        ))}
+        <button
+          className="key action-key"
+          onClick={() => onKeyPress('SUBMIT')}
+        >
+          Valider
+        </button>
+      </div>
     </div>
   );
 };
