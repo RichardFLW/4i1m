@@ -8,8 +8,8 @@
 }
 
 .letterInput {
-  width: 40px;
-  height: 40px;
+  width: 60px; /* Ajusté pour correspondre à la taille des touches */
+  height: 60px; /* Ajusté pour correspondre à la taille des touches */
   text-align: center;
   font-size: 1.5rem;
   border: 1px solid #ccc;
@@ -20,16 +20,16 @@
 
 @media (max-width: 768px) {
   .letterInput {
-    width: 30px;
-    height: 30px;
+    width: 50px; /* Ajusté pour correspondre à la taille des touches */
+    height: 50px; /* Ajusté pour correspondre à la taille des touches */
     font-size: 1.2rem;
   }
 }
 
 @media (max-width: 375px) {
   .letterInput {
-    width: 25px;
-    height: 25px;
+    width: 40px; /* Ajusté pour correspondre à la taille des touches */
+    height: 40px; /* Ajusté pour correspondre à la taille des touches */
     font-size: 1rem;
   }
 }

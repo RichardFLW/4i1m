@@ -1,10 +1,12 @@
-// components/ResultMessage.js
-
 import React from "react";
-import "./ResultMessage.module.css"; // Assurez-vous de charger les styles CSS
+import styles from "./ResultMessage.module.css"; // Assurez-vous d'importer les styles
 
-const ResultMessage = ({ resultMessage }) => {
-  return resultMessage && <div className="resultMessage">{resultMessage}</div>;
+const ResultMessage = ({ message, isSuccess }) => {
+  return (
+    <div className={isSuccess ? styles.successMessage : styles.errorMessage}>
+      {message}
+    </div>
+  );
 };
 
 export default ResultMessage;

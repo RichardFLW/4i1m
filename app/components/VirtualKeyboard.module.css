@@ -1,59 +1,110 @@
-/* components/VirtualKeyboard.module.css */
 .keyboard {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  align-items: center;
   justify-content: center;
-  padding: 1rem;
+  gap: 15px;
+  padding: 1.5rem;
   background-color: #f3f4f6;
-  border-radius: 0.5rem;
-  margin-top: 1rem;
-  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 1rem auto;
+  width: 90%;
   max-width: 600px;
 }
 
-.keyboard-row {
+.keyboardRow {
   display: flex;
   gap: 10px;
   justify-content: center;
+  width: 100%;
 }
 
 .key {
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
+  width: 60px;
+  height: 60px;
+  font-size: 1.25rem;
   cursor: pointer;
-  border: 1px solid #ccc;
+  border: 2px solid #ddd;
   background-color: #fff;
-  border-radius: 0.5rem;
-  transition: background-color 0.3s;
-  color: #000;
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+  color: #0049ff;
   text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.key:hover {
+  background-color: #e6e6e6;
 }
 
 .key:active {
-  background-color: #ddd;
+  background-color: #cccccc;
+  transform: translateY(2px);
 }
 
-.action-key {
+.actionKey {
   background-color: #0049ff;
   color: #fff;
   font-weight: bold;
+  border: none;
 }
 
-.action-key:active {
+.actionKey:hover {
   background-color: #003bb5;
 }
 
+.actionKey:active {
+  background-color: #002f8b;
+  transform: translateY(2px);
+}
+
+.successMessage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  font-weight: bold;
+  color: #155724;
+  background-color: #d4edda;
+  padding: 10px 20px;
+  border: 1px solid #c3e6cb;
+  border-radius: 8px;
+  z-index: 20;
+}
+
+.errorMessage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  font-weight: bold;
+  color: #721c24;
+  background-color: #f8d7da;
+  padding: 10px 20px;
+  border: 1px solid #f5c6cb;
+  border-radius: 8px;
+  z-index: 20;
+}
+
 @media (max-width: 768px) {
-  .key {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.9rem;
+  .key, .actionKey {
+    width: 50px;
+    height: 50px;
+    font-size: 1rem;
   }
 }
 
 @media (max-width: 375px) {
-  .key {
-    padding: 0.3rem 0.6rem;
+  .key, .actionKey {
+    width: 40px;
+    height: 40px;
     font-size: 0.8rem;
   }
 }

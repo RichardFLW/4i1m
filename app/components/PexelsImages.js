@@ -3,11 +3,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import VirtualKeyboard from "./VirtualKeyboard";
-import GuessField from "./GuessField";
+import GuessInputs from "./GuessInputs";
 import ResultMessage from "./ResultMessage";
 import LoadingIndicator from "./LoadingIndicator";
-import words from "./words"; // Importer la liste des mots
-import "./PexelsImages.module.css"; // Assurez-vous de charger les styles CSS
+import words from "./words";
+import styles from "./PexelsImages.module.css"; // Importer le fichier CSS
 
 const PexelsImages = () => {
   const [images, setImages] = useState([]);
@@ -17,6 +17,7 @@ const PexelsImages = () => {
     Array(words[0].length).fill("")
   );
   const [resultMessage, setResultMessage] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   const apiKey = process.env.NEXT_PUBLIC_PEXELS_API_KEY;
 
@@ -30,7 +31,7 @@ const PexelsImages = () => {
           },
           params: {
             query: searchQuery,
-            per_page: 4,
+            per_page: 4, // Modifier ici pour obtenir 4 images
           },
         });
         setImages(response.data.photos);
@@ -51,6 +52,7 @@ const PexelsImages = () => {
     e.preventDefault();
     if (inputValues.join("").toLowerCase() === searchQuery.toLowerCase()) {
       setResultMessage("Correct! Bien joué.");
+      setIsSuccess(true);
       setLoading(true);
       setTimeout(() => {
         const nextIndex = (currentIndex + 1) % words.length;
@@ -62,6 +64,7 @@ const PexelsImages = () => {
       }, 2000);
     } else {
       setResultMessage("Incorrect. Réessayez.");
+      setIsSuccess(false);
     }
   };
 
@@ -89,36 +92,36 @@ const PexelsImages = () => {
     }
   };
 
+  const handleCloseMessage = () => {
+    setResultMessage("");
+  };
+
   return (
-    <div className="page">
+    <div className={styles.page}>
       {loading && <LoadingIndicator />}
-      <div className={`content ${loading ? "blurred" : ""}`}>
-        <div className="left-section">
-          {images.length > 0 &&
-            images.map((image, index) => (
-              <div
-                key={image.id}
-                className={`img${index + 1}`}
-                style={{
-                  backgroundImage: `url(${image.src.medium})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              />
-            ))}
-        </div>
-        <div className="right-section">
-          <h1 className="title">Devinez le Mot</h1>
-          <form onSubmit={handleSubmit} className="searchContainer">
-            <GuessField inputValues={inputValues} />
-            <button type="submit">Valider</button>
-          </form>
-          <ResultMessage resultMessage={resultMessage} />
-          <VirtualKeyboard
-            correctWord={searchQuery}
-            onKeyPress={handleKeyPress}
-          />
-        </div>
+      <div className={styles.imageContainer}>
+        {images.map((image, index) => (
+          <div key={index} className={styles.imageWrapper}>
+            <img
+              src={image.src.medium}
+              alt={`Image ${index}`}
+              className={styles.image}
+            />
+          </div>
+        ))}
+      </div>
+      <div className={styles.inputsAndKeyboard}>
+        <h1 className={styles.title}>Devinez le Mot</h1>
+        <form onSubmit={handleSubmit}>
+          <GuessInputs inputValues={inputValues} />
+        </form>
+        {resultMessage && (
+          <ResultMessage message={resultMessage} isSuccess={isSuccess} />
+        )}
+        <VirtualKeyboard
+          correctWord={searchQuery}
+          onKeyPress={handleKeyPress}
+        />
       </div>
     </div>
   );

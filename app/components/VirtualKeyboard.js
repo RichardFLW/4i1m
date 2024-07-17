@@ -1,7 +1,5 @@
-// components/VirtualKeyboard.js
-
 import React, { useEffect, useState } from "react";
-import "./VirtualKeyboard.module.css"; // Assurez-vous de charger les styles CSS
+import styles from "./VirtualKeyboard.module.css";
 
 const VirtualKeyboard = ({ correctWord, onKeyPress }) => {
   const [keys, setKeys] = useState([]);
@@ -25,28 +23,39 @@ const VirtualKeyboard = ({ correctWord, onKeyPress }) => {
   }, [correctWord]);
 
   return (
-    <div className="keyboard">
-      <div className="keyboard-row">
+    <div className={styles.keyboard}>
+      <div className={styles.keyboardRow}>
         {keys.slice(0, 7).map((key, index) => (
-          <button key={index} className="key" onClick={() => onKeyPress(key)}>
+          <button
+            key={index}
+            className={styles.key}
+            onClick={() => onKeyPress(key)}
+          >
             {key}
           </button>
         ))}
         <button
-          className="key action-key"
+          className={`${styles.key} ${styles.actionKey}`}
           onClick={() => onKeyPress("BACKSPACE")}
         >
           ⌫
         </button>
       </div>
-      <div className="keyboard-row">
+      <div className={styles.keyboardRow}>
         {keys.slice(7).map((key, index) => (
-          <button key={index} className="key" onClick={() => onKeyPress(key)}>
+          <button
+            key={index}
+            className={styles.key}
+            onClick={() => onKeyPress(key)}
+          >
             {key}
           </button>
         ))}
-        <button className="key action-key" onClick={() => onKeyPress("SUBMIT")}>
-          Valider
+        <button
+          className={`${styles.key} ${styles.actionKey}`}
+          onClick={() => onKeyPress("SUBMIT")}
+        >
+          ✓
         </button>
       </div>
     </div>

@@ -1,9 +1,7 @@
-// components/GuessField.js
-
 import React from "react";
-import styles from "./GuessField.module.css";
+import styles from "./GuessInputs.module.css"; // Importer le fichier CSS pour les styles
 
-const GuessField = ({ inputValues }) => {
+const GuessInputs = ({ inputValues }) => {
   return (
     <div className={styles.inputsContainer}>
       {inputValues.map((value, index) => (
@@ -19,4 +17,4 @@ const GuessField = ({ inputValues }) => {
   );
 };
 
-export default GuessField;
+export default GuessInputs;

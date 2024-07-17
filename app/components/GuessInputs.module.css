@@ -1,0 +1,27 @@
+.inputsContainer {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.letterInput {
+  width: 60px;
+  height: 60px;
+  font-size: 1.25rem;
+  text-align: center;
+  border: 2px solid #ddd;
+  background-color: #fff;
+  color: #0049ff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+
+.letterInput:hover {
+  background-color: #e6e6e6;
+}
+
+.letterInput:active {
+  background-color: #cccccc;
+  transform: translateY(2px);
+}
