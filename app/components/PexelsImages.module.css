@@ -1,53 +1,52 @@
+/* app/component/PexelsImages/module*/
+
 .page {
   display: flex;
-  height: 100vh;
-  width: 100%;
+  flex-wrap: wrap; /* Permet aux éléments de passer à la ligne suivante si nécessaire */
+  height: 100vh; /* Hauteur de la fenêtre */
+  width: 100%; 
 }
 
 .imageContainer {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  justify-content: center;
-  align-items: center;
-  width: 50%;
+  justify-content: center; /* Centre horizontalement */
+  align-items: center;  /* Centre verticalement */
+  width: 50%; /* Largeur initiale */
 }
 
 .imageWrapper {
-  width: calc(50% - 10px); /* Chaque conteneur prendra 50% de la largeur moins l'espace du gap */
-  height: 45%; /* Ajuster la hauteur selon le besoin */
-  overflow: hidden;
+  width: calc(50% - 10px); /* Deux images par ligne avec un espace de 10px entre elles */
+  height: 45%;  /* Hauteur initiale */
+  overflow: hidden; /* Cache le contenu qui dépasse */
 }
 
 .image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  border-radius: 10px;
+  object-fit: cover; /* Couvre tout l'espace disponible en conservant le ratio */
+  border-radius: 10px; 
 }
 
 .inputsAndKeyboard {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: column; 
+  justify-content: center; 
   align-items: center;
-  width: 50%;
+  width: 50%;  /* Largeur initiale */
   padding: 20px;
 }
 
 .title {
-  font-size: 1.875rem;
+  font-size: 1.875rem; /* 30px */
   font-weight: bold;
   text-align: center;
   color: black;
   margin-bottom: 20px;
 }
 
-@media (min-width: 768px) {
-  .title {
-    font-size: 2.25rem;
-  }
-}
+
 
 .successMessage, .errorMessage {
   padding: 10px 20px;
@@ -68,4 +67,46 @@
   background-color: #f8d7da;
   color: #721c24;
   border: 1px solid #f5c6cb;
+}
+
+/* Media Query simplifiée pour les écrans jusqu'à 1150px */
+@media (max-width: 1150px) {
+  .page {
+    flex-direction: column;
+    align-items: center; 
+  }
+
+  .imageContainer, .inputsAndKeyboard {
+    width: 100%;
+  }
+
+  .imageWrapper {
+    width: 48%; /* Deux images par ligne avec un petit espacement */
+    height: 200px; 
+  }
+}
+
+/* Media Query simplifiée pour les écrans jusqu'à 768px */
+@media (max-width: 768px) {
+  .imageWrapper {
+    height: 150px; 
+  }
+}
+
+/* Media Query simplifiée pour les écrans jusqu'à 320px */
+@media (max-width: 320px) {
+  .imageContainer {
+    height: 50%; 
+  }
+
+  .imageWrapper {
+    width: 95%; /* Une seule image par ligne */
+    height: 25vh; 
+  }
+
+  .letterInput { /* Style pour les inputs de lettres (si présents) */
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
 }
