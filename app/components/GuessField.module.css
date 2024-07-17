@@ -1,0 +1,35 @@
+/* components/GuessField.module.css */
+.inputsContainer {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.letterInput {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  font-size: 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  background-color: #fff;
+  color: #000;
+}
+
+@media (max-width: 768px) {
+  .letterInput {
+    width: 30px;
+    height: 30px;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .letterInput {
+    width: 25px;
+    height: 25px;
+    font-size: 1rem;
+  }
+}

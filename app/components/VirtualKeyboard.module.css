@@ -1,26 +1,59 @@
 /* components/VirtualKeyboard.module.css */
 .keyboard {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 10px;
   justify-content: center;
   padding: 1rem;
   background-color: #f3f4f6;
   border-radius: 0.5rem;
-  margin-top: 2rem;
+  margin-top: 1rem;
+  width: 100%;
+  max-width: 600px;
+}
+
+.keyboard-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
 }
 
 .key {
-  padding: 0.75rem 1.5rem;
-  font-size: 18px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
   cursor: pointer;
   border: 1px solid #ccc;
   background-color: #fff;
   border-radius: 0.5rem;
   transition: background-color 0.3s;
-  color: #000; /* Changed to black */
+  color: #000;
+  text-transform: uppercase;
 }
 
 .key:active {
   background-color: #ddd;
+}
+
+.action-key {
+  background-color: #0049ff;
+  color: #fff;
+  font-weight: bold;
+}
+
+.action-key:active {
+  background-color: #003bb5;
+}
+
+@media (max-width: 768px) {
+  .key {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .key {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+  }
 }
