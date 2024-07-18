@@ -6,10 +6,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1px;
+  gap: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin: 1rem auto;
-  width: min(90vw, 480px);
+  width: min(100vw, 480px);
 }
 
 .keyboardRow {
@@ -19,8 +19,8 @@
 }
 
 .key {
-  width: calc((min(90vw, 480px) - 21px) / 8); /* Largeur dynamique pour 8 touches par ligne */
-  height: calc((min(90vw, 480px) - 21px) / 8);
+  width: calc((min(100vw, 480px) - 21px) / 8); /* Largeur dynamique pour 8 touches par ligne */
+  height: calc((min(100vw, 480px) - 21px) / 8);
   font-size: 1rem;
   cursor: pointer;
   border: 2px solid #ddd;
