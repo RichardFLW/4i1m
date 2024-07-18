@@ -15,6 +15,10 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
+  const handleLinkClick = () => {
+    setIsOpen(false); // Fermer le menu
+  };
+
   return (
     <nav className={styles.navbar}>
       <div className={styles.navbarContent}>
@@ -32,7 +36,7 @@ const Navbar = () => {
               href="/"
               className={`${styles.menuItem} ${
                 pathname === "/" ? styles.menuItemActive : ""
-              }`}
+              }`} onClick={handleLinkClick}
             >
               <FaHome className="mr-2" /> Accueil
             </Link>
@@ -42,7 +46,7 @@ const Navbar = () => {
               href="/jeu"
               className={`${styles.menuItem} ${
                 pathname === "/jeu" ? styles.menuItemActive : ""
-              }`}
+              }`} onClick={handleLinkClick}
             >
               <FaGamepad className="mr-2" /> Le Jeu
             </Link>
