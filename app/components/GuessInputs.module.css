@@ -1,12 +1,17 @@
 .inputsContainer {
   display: flex;
-  gap: 10px;
+  gap: 3px;
   justify-content: center;
+  width: min(90vw, 480px); /* Limite la largeur à 90vw ou 480px, selon le plus petit */
+  height: auto;
+  margin: 0 auto;
+  
 }
 
 .letterInput {
-  width: 60px;
-  height: 60px;
+  width: calc((min(90vw, 480px) - 21px) / 8); /* 21px pour les espaces entre 8 lettres */
+  height: calc((min(90vw, 480px) - 21px) / 8);
+ 
   font-size: 1.25rem;
   text-align: center;
   border: 2px solid #ddd;
@@ -25,3 +30,13 @@
   background-color: #cccccc;
   transform: translateY(2px);
 }
+
+@media (max-width: 500px) {
+
+
+ 
+
+  
+  
+}
+

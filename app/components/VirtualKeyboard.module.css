@@ -1,18 +1,15 @@
 /* app/components/ VirtualKeyboard.module.css*/
 
 .keyboard {
-  position: relative;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 15px;
-  padding: 1.5rem;
-  background-color: #f3f4f6;
+  gap: 1px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin: 1rem auto;
-  width: 90%;
-  max-width: 320px;
+  width: min(90vw, 480px);
 }
 
 .keyboardRow {
@@ -22,8 +19,8 @@
 }
 
 .key {
-  width: 40px;
-  height: 40px;
+  width: calc((min(90vw, 480px) - 21px) / 8); /* Largeur dynamique pour 8 touches par ligne */
+  height: calc((min(90vw, 480px) - 21px) / 8);
   font-size: 1rem;
   cursor: pointer;
   border: 2px solid #ddd;
@@ -35,8 +32,6 @@
   justify-content: center;
   align-items: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  /* Supprimer les bords arrondis */
-  border-radius: 0;
 }
 
 .key:hover {
@@ -93,20 +88,3 @@
   border-radius: 8px;
   z-index: 20;
 }
-
-@media (max-width: 768px) {
-  .key, .actionKey {
-    width: 50px;
-    height: 50px;
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 375px) {
-  .key, .actionKey {
-    width: 40px;
-    height: 40px;
-    font-size: 1rem;
-  }
-}
-

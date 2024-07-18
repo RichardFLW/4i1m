@@ -1,7 +1,6 @@
 // components/GuessField.js
 
 import React from "react";
-import styles from "./GuessField.module.css";
 
 const GuessField = ({ inputValues }) => {
   return (
