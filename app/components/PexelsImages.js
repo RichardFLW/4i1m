@@ -69,7 +69,7 @@ const PexelsImages = () => {
         cancelTokenSource.cancel(); 
       };
     }
-  }, [searchQuery, currentIndex]); // Dépendances pour déclencher le préchargement
+  }, [searchQuery, currentIndex, apiKey]); // Dépendances pour déclencher le préchargement
 
 
   const handleSubmit = (e) => {
