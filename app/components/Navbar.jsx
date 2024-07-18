@@ -22,7 +22,7 @@ const Navbar = () => {
   return (
     <nav className={styles.navbar}>
       <div className={styles.navbarContent}>
-        <div className="text-lg font-bold">4 Images 1 Mot</div>
+        <div className="text-lg font-bold">4 Images 1 Word. englishVersion</div>
         <button onClick={toggleMenu} className={styles.menuButton}>
           {isOpen ? <FaTimes /> : <FaBars />}
         </button>
