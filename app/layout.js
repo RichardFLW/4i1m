@@ -1,8 +1,6 @@
-// app/layout.js or app/layout.tsx
-
-import Navbar from './components/Navbar';
-import './globals.css';
-import { Raleway, Merriweather } from 'next/font/google';
+import Navbar from "./components/Navbar";
+import "./globals.css";
+import { Raleway, Merriweather } from "next/font/google";
 
 const raleway = Raleway({
   subsets: ["latin"],
@@ -19,8 +17,13 @@ const merriweather = Merriweather({
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${raleway.variable} ${merriweather.variable}`}>
+      <head>
+        <link rel="icon" href="/favicon.ico" />
+      </head>
       <body>
-        <Navbar/>{children}</body>
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }

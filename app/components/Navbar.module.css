@@ -1,7 +1,7 @@
 /* app/components/Navbar.module.css */
 .navbar {
-  background-color: white;
-  color: black;
+ background: #282c34;
+  color: white;
   padding: 1rem;
   height: 8vh;
 }
