@@ -22,8 +22,8 @@ const Navbar = () => {
   return (
     <nav className={styles.navbar}>
       <div className={styles.navbarContent}>
-        <div className="text-lg font-bold">4 Images 1 Word. englishwords</div>
-        <button onClick={toggleMenu} className={styles.menuButton}>
+        <div className="text-lg font-bold">4 Images 1 Mot</div>
+        <button onClick={toggleMenu} className={styles.menuButton} aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}>
           {isOpen ? <FaTimes /> : <FaBars />}
         </button>
         <ul

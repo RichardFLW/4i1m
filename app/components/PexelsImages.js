@@ -10,21 +10,21 @@ import LoadingIndicator from "./LoadingIndicator";
 import words from "./words";
 import styles from "./PexelsImages.module.css";
 import ResultModal from "./ResultModal";
-import Image from 'next/image';
+import Image from "next/image";
 
 const PexelsImages = () => {
   const [images, setImages] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [searchQuery, setSearchQuery] = useState(words[0]);
-  const [inputValues, setInputValues] = useState(Array(words[0].length).fill(""));
+  const [inputValues, setInputValues] = useState(
+    Array(words[0].length).fill("")
+  );
   const [isSuccess, setIsSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const nextImagesRef = useRef([]); // Stockage des images préchargées dans un useRef
   const apiKey = process.env.NEXT_PUBLIC_PEXELS_API_KEY;
-
-
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -37,40 +37,43 @@ const PexelsImages = () => {
         setImages(response.data.photos);
         setLoading(false);
       } catch (error) {
-        console.error("Erreur lors de la récupération des images de Pexels:", error);
+        console.error(
+          "Erreur lors de la récupération des images de Pexels:",
+          error
+        );
         setLoading(false);
       }
     };
 
     fetchImages();
 
-     // Préchargement des images suivantes
-     if (currentIndex < words.length - 1) {
+    // Préchargement des images suivantes
+    if (currentIndex < words.length - 1) {
       const cancelTokenSource = axios.CancelToken.source(); // Pour annuler la requête si nécessaire
 
-      axios.get(`https://api.pexels.com/v1/search`, {
-        headers: { Authorization: apiKey },
-        params: { query: words[currentIndex + 1], per_page: 4 },
-        cancelToken: cancelTokenSource.token,
-      })
-      .then(response => {
-        nextImagesRef.current = response.data.photos;
-      })
-      .catch(error => {
-        if (axios.isCancel(error)) {
-          console.log("Préchargement annulé");
-        } else {
-          console.error("Erreur lors du préchargement des images:", error);
-        }
-      });
+      axios
+        .get(`https://api.pexels.com/v1/search`, {
+          headers: { Authorization: apiKey },
+          params: { query: words[currentIndex + 1], per_page: 4 },
+          cancelToken: cancelTokenSource.token,
+        })
+        .then((response) => {
+          nextImagesRef.current = response.data.photos;
+        })
+        .catch((error) => {
+          if (axios.isCancel(error)) {
+            console.log("Préchargement annulé");
+          } else {
+            console.error("Erreur lors du préchargement des images:", error);
+          }
+        });
 
       // Annuler le préchargement si le composant est démonté ou si l'index change
       return () => {
-        cancelTokenSource.cancel(); 
+        cancelTokenSource.cancel();
       };
     }
   }, [searchQuery, currentIndex, apiKey]); // Dépendances pour déclencher le préchargement
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -81,7 +84,7 @@ const PexelsImages = () => {
       setModalMessage("Oups... Ce n'est pas ça. Réessaie !");
       setIsSuccess(false);
     }
-    setShowModal(true); 
+    setShowModal(true);
   };
 
   const handleKeyPress = (key) => {
@@ -124,53 +127,50 @@ const PexelsImages = () => {
           setImages(nextImagesRef.current);
           nextImagesRef.current = []; // Réinitialiser
         } else {
-          fetchImages(); 
+          fetchImages();
         }
 
         setLoading(false);
-      }, 200); 
+      }, 200);
     } else {
       setInputValues(Array(searchQuery.length).fill(""));
     }
   };
 
-
-
   return (
     <div className={styles.page}>
       {loading && <LoadingIndicator />}
       <div className={styles.imageContainer}>
-  {images.map((image, index) => (
-    <div key={index} className={styles.imageWrapper}>
-      <Image
-        src={image.src.medium}
-        alt={`Image ${index}`}
-        className={styles.image}
-        width={300} // Spécifiez la largeur (obligatoire)
-        height={300} // Spécifiez la hauteur (obligatoire)
-      />
-    </div>
+        {images.map((image, index) => (
+          <div key={index} className={styles.imageWrapper}>
+            <Image
+              src={image.src.medium}
+              alt={`Image ${index}`}
+              className={styles.image}
+              width={300} // Spécifiez la largeur (obligatoire)
+              height={300} // Spécifiez la hauteur (obligatoire)
+            />
+          </div>
         ))}
       </div>
       <div className={styles.inputsAndKeyboard}>
-        <h1 className={styles.title}>Devinez le Mot</h1>
+        <h1 className={styles.title}>Devinez le mot anglais :</h1>
         <form onSubmit={handleSubmit}>
           <GuessInputs inputValues={inputValues} />
         </form>
-       
+
         <VirtualKeyboard
           correctWord={searchQuery}
           onKeyPress={handleKeyPress}
         />
       </div>
-      <ResultModal 
-        isOpen={showModal} 
-        message={modalMessage} 
-        isSuccess={isSuccess} 
-        onClose={handleCloseModal} 
+      <ResultModal
+        isOpen={showModal}
+        message={modalMessage}
+        isSuccess={isSuccess}
+        onClose={handleCloseModal}
       />
     </div>
-    
   );
 };
 

@@ -1,3 +1,4 @@
+// app/pages
 "use client";
 import { useEffect, useRef } from "react";
 import Image from "next/image";
@@ -21,6 +22,7 @@ const merriweather = Merriweather({
 export default function Home() {
   const router = useRouter();
   const shapesContainerRef = useRef(null); // Utilisation de useRef pour le conteneur des formes
+  
 
   useEffect(() => {
     const shapesContainer = shapesContainerRef.current;
@@ -55,7 +57,7 @@ export default function Home() {
 
   // Gestionnaire de clic pour le bouton
   const handleClick = () => {
-    router.push("/jeu"); // Remplacez '/jeu' par le chemin vers votre jeu
+    router.push("/jeu"); 
   };
 
   return (
@@ -67,14 +69,15 @@ export default function Home() {
         </div>
         <section className={styles.section}>
           <Image
-            src="/eskcaST8S_y1xbULqqsCqQ.jpeg"
+            src="/eskcaST8S_y1xbULqqsCqQ.webp"
             alt="Image 1"
             width={600}
             height={600}
+            quality={75} 
             className={styles.image}
           />
           <button onClick={handleClick} className={styles.button}>
-            <span className={styles.buttonIcon}>🎮</span> Jouer
+           Jouer
           </button>
         </section>
       </main>
