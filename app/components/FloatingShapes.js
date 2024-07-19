@@ -1,3 +1,6 @@
+import { useEffect, useRef } from "react";
+import styles from "./FloatingShapes.module.css";
+
 const FloatingShapes = () => {
   const shapesContainerRef = useRef(null);
 
@@ -29,3 +32,5 @@ const FloatingShapes = () => {
 
   return <div className={styles.shapes} ref={shapesContainerRef}></div>;
 };
+
+export default FloatingShapes;
