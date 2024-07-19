@@ -40,6 +40,7 @@ export default function Home() {
             width={450}
             height={500}
             quality={75}
+            priority
             className={styles.image}
             placeholder="blur"
             blurDataURL="data:image/webp;base64,..."
