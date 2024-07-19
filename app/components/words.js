@@ -2,7 +2,9 @@
 
 const words = [
   "nature",
+  "cat",
   "honey",
+  "dog",
   "mountain",
   "river",
   "ocean",

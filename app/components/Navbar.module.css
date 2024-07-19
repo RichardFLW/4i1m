@@ -14,7 +14,7 @@
 .menuButton {
   display: block;
   width: 30px;
-  height: 30px;
+  height: 20px;
   position: relative;
   cursor: pointer;
 }
