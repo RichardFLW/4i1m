@@ -1,6 +1,7 @@
 import Navbar from "./components/Navbar";
 import "./globals.css";
 import { Raleway, Merriweather } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const raleway = Raleway({
   subsets: ["latin"],
@@ -21,6 +22,7 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body>
+        <SpeedInsights />
         <Navbar />
         {children}
       </body>
