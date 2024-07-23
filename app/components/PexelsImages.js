@@ -1,5 +1,3 @@
-// app/components/PexelsImages.js
-
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
@@ -12,11 +10,11 @@ import styles from "./PexelsImages.module.css";
 import ResultModal from "./ResultModal";
 import Image from "next/image";
 
-const PexelsImages = () => {
+const PexelsImages = ({ language }) => {
   const [images, setImages] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [searchQuery, setSearchQuery] = useState(words[0]);
-  const [inputValues, setInputValues] = useState(Array(words[0].length).fill(""));
+  const [searchQuery, setSearchQuery] = useState(words["en"][0]);
+  const [inputValues, setInputValues] = useState(Array(words[language][0].length).fill(""));
   const [isSuccess, setIsSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -42,12 +40,12 @@ const PexelsImages = () => {
 
     fetchImages();
 
-    if (currentIndex < words.length - 1) {
+    if (currentIndex < words["en"].length - 1) {
       const cancelTokenSource = axios.CancelToken.source();
       axios
         .get(`https://api.pexels.com/v1/search`, {
           headers: { Authorization: apiKey },
-          params: { query: words[currentIndex + 1], per_page: 4 },
+          params: { query: words["en"][currentIndex + 1], per_page: 4 },
           cancelToken: cancelTokenSource.token,
         })
         .then((response) => {
@@ -69,7 +67,7 @@ const PexelsImages = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (inputValues.join("").toLowerCase() === searchQuery.toLowerCase()) {
+    if (inputValues.join("").toLowerCase() === words[language][currentIndex].toLowerCase()) {
       setModalMessage("Bravo ! C'est correct.");
       setIsSuccess(true);
     } else {
@@ -108,10 +106,10 @@ const PexelsImages = () => {
     if (isSuccess) {
       setLoading(true);
       setTimeout(() => {
-        const nextIndex = (currentIndex + 1) % words.length;
+        const nextIndex = (currentIndex + 1) % words[language].length;
         setCurrentIndex(nextIndex);
-        setSearchQuery(words[nextIndex]);
-        setInputValues(Array(words[nextIndex].length).fill(""));
+        setSearchQuery(words["en"][nextIndex]);
+        setInputValues(Array(words[language][nextIndex].length).fill(""));
         if (nextImagesRef.current.length > 0) {
           setImages(nextImagesRef.current);
           nextImagesRef.current = [];
@@ -121,7 +119,7 @@ const PexelsImages = () => {
         setLoading(false);
       }, 200);
     } else {
-      setInputValues(Array(searchQuery.length).fill(""));
+      setInputValues(Array(words[language][currentIndex].length).fill(""));
     }
   };
 
@@ -142,11 +140,11 @@ const PexelsImages = () => {
         ))}
       </div>
       <div className={styles.inputsAndKeyboard}>
-        <h1 className={styles.title}>Devinez le mot anglais :</h1>
+        <h1 className={styles.title}>Devinez le mot {language === "fr" ? "français" : "anglais"} :</h1>
         <form onSubmit={handleSubmit}>
           <GuessInputs inputValues={inputValues} />
         </form>
-        <VirtualKeyboard correctWord={searchQuery} onKeyPress={handleKeyPress} />
+        <VirtualKeyboard correctWord={words[language][currentIndex]} onKeyPress={handleKeyPress} />
       </div>
       <ResultModal
         isOpen={showModal}

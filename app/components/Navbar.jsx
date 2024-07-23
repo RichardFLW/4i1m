@@ -1,5 +1,3 @@
-//app/components/Navbar.jsx
-
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
@@ -15,7 +13,7 @@ const Navbar = () => {
   };
 
   const handleLinkClick = () => {
-    setIsOpen(false); // Fermer le menu
+    setIsOpen(false);
   };
 
   return (
@@ -31,15 +29,11 @@ const Navbar = () => {
           <div></div>
           <div></div>
         </button>
-        <ul
-          className={`${styles.menuItems} ${isOpen ? styles.menuItemsOpen : ""}`}
-        >
+        <ul className={`${styles.menuItems} ${isOpen ? styles.menuItemsOpen : ""}`}>
           <li>
             <Link
               href="/"
-              className={`${styles.menuItem} ${
-                pathname === "/" ? styles.menuItemActive : ""
-              }`}
+              className={`${styles.menuItem} ${pathname === "/" ? styles.menuItemActive : ""}`}
               onClick={handleLinkClick}
             >
               Accueil
@@ -47,10 +41,8 @@ const Navbar = () => {
           </li>
           <li>
             <Link
-              href="/jeu"
-              className={`${styles.menuItem} ${
-                pathname === "/jeu" ? styles.menuItemActive : ""
-              }`}
+              href="/select-language"
+              className={`${styles.menuItem} ${pathname === "/select-language" ? styles.menuItemActive : ""}`}
               onClick={handleLinkClick}
             >
               Le Jeu
