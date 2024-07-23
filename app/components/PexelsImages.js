@@ -1,4 +1,4 @@
-//app /components/PexelsImages.js
+// app/components/PexelsImages.js
 
 "use client";
 
@@ -16,14 +16,12 @@ const PexelsImages = () => {
   const [images, setImages] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [searchQuery, setSearchQuery] = useState(words[0]);
-  const [inputValues, setInputValues] = useState(
-    Array(words[0].length).fill("")
-  );
+  const [inputValues, setInputValues] = useState(Array(words[0].length).fill(""));
   const [isSuccess, setIsSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
-  const nextImagesRef = useRef([]); // Stockage des images préchargées dans un useRef
+  const nextImagesRef = useRef([]);
   const apiKey = process.env.NEXT_PUBLIC_PEXELS_API_KEY;
 
   useEffect(() => {
@@ -35,22 +33,17 @@ const PexelsImages = () => {
           params: { query: searchQuery, per_page: 4 },
         });
         setImages(response.data.photos);
-        setLoading(false);
       } catch (error) {
-        console.error(
-          "Erreur lors de la récupération des images de Pexels:",
-          error
-        );
+        console.error("Erreur lors de la récupération des images de Pexels:", error);
+      } finally {
         setLoading(false);
       }
     };
 
     fetchImages();
 
-    // Préchargement des images suivantes
     if (currentIndex < words.length - 1) {
-      const cancelTokenSource = axios.CancelToken.source(); // Pour annuler la requête si nécessaire
-
+      const cancelTokenSource = axios.CancelToken.source();
       axios
         .get(`https://api.pexels.com/v1/search`, {
           headers: { Authorization: apiKey },
@@ -68,12 +61,11 @@ const PexelsImages = () => {
           }
         });
 
-      // Annuler le préchargement si le composant est démonté ou si l'index change
       return () => {
         cancelTokenSource.cancel();
       };
     }
-  }, [searchQuery, currentIndex, apiKey]); // Dépendances pour déclencher le préchargement
+  }, [searchQuery, currentIndex, apiKey]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -113,7 +105,6 @@ const PexelsImages = () => {
 
   const handleCloseModal = () => {
     setShowModal(false);
-
     if (isSuccess) {
       setLoading(true);
       setTimeout(() => {
@@ -121,15 +112,12 @@ const PexelsImages = () => {
         setCurrentIndex(nextIndex);
         setSearchQuery(words[nextIndex]);
         setInputValues(Array(words[nextIndex].length).fill(""));
-
-        // Utiliser les images préchargées s'il y en a
         if (nextImagesRef.current.length > 0) {
           setImages(nextImagesRef.current);
-          nextImagesRef.current = []; // Réinitialiser
+          nextImagesRef.current = [];
         } else {
           fetchImages();
         }
-
         setLoading(false);
       }, 200);
     } else {
@@ -147,8 +135,8 @@ const PexelsImages = () => {
               src={image.src.medium}
               alt={`Image ${index}`}
               className={styles.image}
-              width={300} // Spécifiez la largeur (obligatoire)
-              height={300} // Spécifiez la hauteur (obligatoire)
+              width={300}
+              height={300}
             />
           </div>
         ))}
@@ -158,11 +146,7 @@ const PexelsImages = () => {
         <form onSubmit={handleSubmit}>
           <GuessInputs inputValues={inputValues} />
         </form>
-
-        <VirtualKeyboard
-          correctWord={searchQuery}
-          onKeyPress={handleKeyPress}
-        />
+        <VirtualKeyboard correctWord={searchQuery} onKeyPress={handleKeyPress} />
       </div>
       <ResultModal
         isOpen={showModal}

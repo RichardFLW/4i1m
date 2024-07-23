@@ -1,3 +1,4 @@
+//services/pexelsServices.js
 import axios from 'axios';
 
 const API_KEY = process.env.NEXT_PUBLIC_PEXELS_API_KEY;

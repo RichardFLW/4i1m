@@ -1,3 +1,5 @@
+//app/lib/words.js
+
 export async function getWords() {
   const response = await fetch('/api/words');
   if (!response.ok) {

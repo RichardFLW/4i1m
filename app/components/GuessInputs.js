@@ -1,3 +1,5 @@
+//app/components/GuessInputs.js
+
 import React from "react";
 import styles from "./GuessInputs.module.css"; // Importer le fichier CSS pour les styles
 

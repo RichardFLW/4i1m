@@ -1,3 +1,4 @@
+//app/components/FloatingShape.js
 import { useEffect, useRef } from "react";
 import styles from "./FloatingShapes.module.css";
 

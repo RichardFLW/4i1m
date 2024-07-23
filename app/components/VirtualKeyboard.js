@@ -1,3 +1,4 @@
+// app/components/VirtualKeyboard.js
 import React, { useEffect, useState } from "react";
 import styles from "./VirtualKeyboard.module.css";
 
@@ -11,8 +12,7 @@ const VirtualKeyboard = ({ correctWord, onKeyPress }) => {
       const availableKeys = new Set([...letters]);
 
       while (availableKeys.size < 14) {
-        const randomLetter =
-          alphabet[Math.floor(Math.random() * alphabet.length)];
+        const randomLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
         availableKeys.add(randomLetter);
       }
 

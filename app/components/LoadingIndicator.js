@@ -1,4 +1,4 @@
-// components/LoadingIndicator.js
+ //app/components/LoadingIndicator.js
 
 import React from "react";
 import "./LoadingIndicator.module.css"; // Assurez-vous de charger les styles CSS

@@ -1,21 +1,7 @@
-//app>layout.js
-
 import Navbar from "./components/Navbar";
 import "./globals.css";
-import { Raleway, Merriweather } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-
-const raleway = Raleway({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-raleway",
-});
-
-const merriweather = Merriweather({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-merriweather",
-});
+import { raleway, merriweather } from "../Config/fonts"; // Importer les polices depuis config/fonts.js
 
 export default function RootLayout({ children }) {
   return (
@@ -31,7 +17,6 @@ export default function RootLayout({ children }) {
           name="keywords"
           content="4 images 1 mot, jeu de mots, jeu de réflexion, jeu en développement"
         />
-
         <meta
           property="og:title"
           content="4 Images pour 1 Mot - Jeu en développement"
@@ -42,7 +27,6 @@ export default function RootLayout({ children }) {
         />
         <meta property="og:image" content="https://4i1m.vercel.app/" />
         <meta property="og:url" content="https://4i1m.vercel.app/" />
-
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"

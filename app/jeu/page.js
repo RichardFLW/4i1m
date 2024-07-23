@@ -1,4 +1,4 @@
-// pages/index.js ou app/page.js selon votre structure
+//  app/jeu/page.js 
 import React from 'react';
 import PexelsImages from '../components/PexelsImages';
 
