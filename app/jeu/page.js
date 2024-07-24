@@ -2,7 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import PexelsImages from "../components/PexelsImages";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 const JeuPage = () => {
   const searchParams = useSearchParams();
@@ -23,4 +23,12 @@ const JeuPage = () => {
   return <PexelsImages language={language} />;
 };
 
-export default JeuPage;
+const JeuPageWrapper = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <JeuPage />
+    </Suspense>
+  );
+};
+
+export default JeuPageWrapper;
