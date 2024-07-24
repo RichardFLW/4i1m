@@ -7,7 +7,6 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin: 1rem auto;
   width: min(100vw, 480px);
 }
@@ -19,12 +18,14 @@
 }
 
 .key {
-  width: calc((min(100vw, 480px) - 21px) / 8); /* Largeur dynamique pour 8 touches par ligne */
+  width: calc(
+    (min(100vw, 480px) - 21px) / 8
+  ); /* Largeur dynamique pour 8 touches par ligne */
   height: calc((min(100vw, 480px) - 21px) / 8);
   font-size: 1rem;
   cursor: pointer;
   border: 2px solid #ddd;
-  background-color: #fff;
+
   transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
   color: black;
   font-weight: bold;
@@ -45,7 +46,7 @@
 }
 
 .actionKey {
-  background-color: #E0A644;
+  background-color: #e0a644;
   color: #fff;
   font-weight: bold;
   border: none;
@@ -56,7 +57,6 @@
 }
 
 .actionKey:active {
-  background-color: #002f8b;
   transform: translateY(2px);
 }
 
