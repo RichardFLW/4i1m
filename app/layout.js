@@ -42,6 +42,7 @@ export default function RootLayout({ children }) {
         <SpeedInsights />
         <Navbar />
         {children}
+        import {Analytics} from "@vercel/analytics/react"
       </body>
     </html>
   );
