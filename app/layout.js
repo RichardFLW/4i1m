@@ -1,7 +1,7 @@
 import Navbar from "./components/Navbar";
 import "./globals.css";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { raleway, merriweather } from "../Config/fonts"; 
+import { raleway, merriweather } from "../config/fonts"; 
 
 export default function RootLayout({ children }) {
   return (
