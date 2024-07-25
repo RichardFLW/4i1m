@@ -3,7 +3,7 @@
 .page {
   display: flex;
   flex-wrap: wrap;
-  height: 92vh; /* Hauteur de la fenêtre */
+  height: 90vh; 
   width:100vw;
 }
 
@@ -14,13 +14,14 @@
   justify-content: center;
   align-items: center; 
   width: 100vw;
-  height: 50vh;
+  height: 45vh;
 }
 
 .imageWrapper {
   width: 300px; 
-  height: 300px;  
+  height: 30vh;  
   overflow: hidden; 
+  margin-top: 10px;
 }
 
 .image {
@@ -36,7 +37,7 @@
 }
 
 .title {
-  font-size: 1.875rem;
+  font-size: 1.5em;
   font-weight: bold;
   text-align: center;
   color: black;

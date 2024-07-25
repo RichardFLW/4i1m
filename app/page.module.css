@@ -14,7 +14,7 @@
 /* Styles pour le conteneur principal */
 .main {
   width: 100vw;
-  height: 92vh;
+  height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;
