@@ -1,15 +1,12 @@
+// app/components/PexelsImages.jsx
 "use client";
-
-
 import React, { useEffect, useState, useRef } from "react";
-
 import axios from "axios";
-
 import VirtualKeyboard from "./VirtualKeyboard";
 import GuessInputs from "./GuessInputs";
 import LoadingIndicator from "./LoadingIndicator";
-import words from "./words"; 
-import styles from "./PexelsImages.module.css"; 
+import words from "./words";
+import styles from "./PexelsImages.module.css";
 import ResultModal from "./ResultModal";
 import Image from "next/image";
 
@@ -19,9 +16,7 @@ const PexelsImages = ({ language }) => {
   const [images, setImages] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [searchQuery, setSearchQuery] = useState(words["en"][0]);
-  const [inputValues, setInputValues] = useState(
-    Array(words[language][0].length).fill("")
-  );
+  const [inputValues, setInputValues] = useState(Array(words[language][0].length).fill(""));
   const [isSuccess, setIsSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -29,65 +24,50 @@ const PexelsImages = ({ language }) => {
   const nextImagesRef = useRef([]); // Utilisation de useRef pour stocker les images préchargées
   const apiKey = process.env.NEXT_PUBLIC_PEXELS_API_KEY; // Clé API pour accéder à l'API Pexels
 
-  // Utilisation de useEffect pour charger les images lorsque `searchQuery` ou `currentIndex` change
+  // Utilisation de useEffect pour charger l'état du jeu à partir du localStorage
   useEffect(() => {
-    // Fonction pour récupérer les images de Pexels
-    const fetchImages = async () => {
-      setLoading(true);
-      try {
-        const response = await axios.get(`https://api.pexels.com/v1/search`, {
-          headers: { Authorization: apiKey },
-          params: { query: searchQuery, per_page: 4 },
-        });
-        setImages(response.data.photos); // Mise à jour de l'état `images`
-      } catch (error) {
-        console.error(
-          "Erreur lors de la récupération des images de Pexels:",
-          error
-        );
-      } finally {
-        setLoading(false); // Désactiver le chargement une fois les images récupérées
-      }
-    };
-
-    fetchImages();
-
-    // Préchargement des images pour le prochain mot
-    if (currentIndex < words["en"].length - 1) {
-      const cancelTokenSource = axios.CancelToken.source(); // Création d'un token pour annuler la requête si nécessaire
-      axios
-        .get(`https://api.pexels.com/v1/search`, {
-          headers: { Authorization: apiKey },
-          params: { query: words["en"][currentIndex + 1], per_page: 4 },
-          cancelToken: cancelTokenSource.token,
-        })
-        .then((response) => {
-          nextImagesRef.current = response.data.photos; // Stockage des images préchargées
-        })
-        .catch((error) => {
-          if (axios.isCancel(error)) {
-            console.log("Préchargement annulé");
-          } else {
-            console.error("Erreur lors du préchargement des images:", error);
-          }
-        });
-
-      // Nettoyage de l'effet pour annuler la requête si le composant est démonté ou si `currentIndex` change
-      return () => {
-        cancelTokenSource.cancel();
-      };
+    const savedState = JSON.parse(localStorage.getItem('gameState'));
+    if (savedState) {
+      setCurrentIndex(savedState.currentIndex);
+      setSearchQuery(words["en"][savedState.currentIndex]);
+      setInputValues(Array(words[language][savedState.currentIndex].length).fill(""));
+    } else {
+      fetchImages();
     }
-  }, [searchQuery, currentIndex, apiKey]); // Dépendances: ce code s'exécute chaque fois que `searchQuery`, `currentIndex` ou `apiKey` change
+  }, [language]);
+
+  // Utilisation de useEffect pour récupérer les images lorsque `searchQuery` ou `currentIndex` change
+  useEffect(() => {
+    fetchImages();
+  }, [searchQuery]);
+
+  const fetchImages = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get(`https://api.pexels.com/v1/search`, {
+        headers: { Authorization: apiKey },
+        params: { query: searchQuery, per_page: 4 },
+      });
+      setImages(response.data.photos); // Mise à jour de l'état `images`
+    } catch (error) {
+      console.error("Erreur lors de la récupération des images de Pexels:", error);
+    } finally {
+      setLoading(false); // Désactiver le chargement une fois les images récupérées
+    }
+  };
 
   // Fonction pour gérer la soumission du formulaire
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      inputValues.join("").toLowerCase() ===
-      words[language][currentIndex].toLowerCase()
-    ) {
+    if (inputValues.join("").toLowerCase() === words[language][currentIndex].toLowerCase()) {
       setModalMessage("Bravo ! C'est correct.");
       setIsSuccess(true);
+      const nextIndex = (currentIndex + 1) % words[language].length;
+      // Sauvegarder l'état du jeu dans le localStorage
+      localStorage.setItem('gameState', JSON.stringify({ currentIndex: nextIndex }));
+      setCurrentIndex(nextIndex);
+      setSearchQuery(words["en"][nextIndex]);
+      setInputValues(Array(words[language][nextIndex].length).fill(""));
     } else {
       setModalMessage("Oups... Ce n'est pas ça. Réessaie !");
       setIsSuccess(false);
@@ -123,22 +103,7 @@ const PexelsImages = ({ language }) => {
   // Fonction pour fermer la modal de résultat
   const handleCloseModal = () => {
     setShowModal(false);
-    if (isSuccess) {
-      setLoading(true);
-      setTimeout(() => {
-        const nextIndex = (currentIndex + 1) % words[language].length;
-        setCurrentIndex(nextIndex);
-        setSearchQuery(words["en"][nextIndex]);
-        setInputValues(Array(words[language][nextIndex].length).fill(""));
-        if (nextImagesRef.current.length > 0) {
-          setImages(nextImagesRef.current);
-          nextImagesRef.current = [];
-        } else {
-          fetchImages();
-        }
-        setLoading(false);
-      }, 200);
-    } else {
+    if (!isSuccess) {
       setInputValues(Array(words[language][currentIndex].length).fill(""));
     }
   };
