@@ -1,45 +1,64 @@
-"use client"; 
+// app/components/SelectLanguagePage.jsx
+"use client";
 
 import { useRouter } from "next/navigation";
-
+import React, { useEffect, useState } from "react";
 import styles from "./SelectLanguage.module.css";
+import words from "../components/words";
 
-// Déclaration du composant fonctionnel `SelectLanguagePage`
 const SelectLanguagePage = () => {
-  
   const router = useRouter();
+  const [progress, setProgress] = useState({ en: 0, fr: 0 });
 
-  // Fonction pour gérer la sélection de la langue
+  useEffect(() => {
+    const calculateProgress = (language) => {
+      const savedState = JSON.parse(localStorage.getItem(`gameState-${language}`));
+      if (savedState && savedState.currentIndex) {
+        return Math.round((savedState.currentIndex / words[language].length) * 100);
+      }
+      return 0;
+    };
+
+    setProgress({
+      en: calculateProgress("en"),
+      fr: calculateProgress("fr"),
+    });
+  }, []);
+
   const handleLanguageSelect = (language) => {
-    // Utilisation de `router.push` pour naviguer vers la page `/jeu` avec la langue sélectionnée en tant que paramètre de requête
     router.push(`/jeu?lang=${language}`);
   };
 
-  // Rendu du composant
+  const handleReset = (language) => {
+    localStorage.removeItem(`gameState-${language}`);
+    setProgress((prev) => ({ ...prev, [language]: 0 }));
+  };
+
   return (
     <div className={styles.container}>
-     
       <h1 className={styles.title}>Je devine le mot en :</h1>
-    
       <div className={styles.buttons}>
-       
-        <button
-          onClick={() => handleLanguageSelect("en")}
-          className={styles.button}
-        >
-          Anglais
-        </button>
-       
-        <button
-          onClick={() => handleLanguageSelect("fr")}
-          className={styles.button}
-        >
-          Français
-        </button>
+        <div className={styles.languageContainer}>
+          <button onClick={() => handleLanguageSelect("en")} className={styles.button}>
+            Anglais
+          </button>
+          <p className={styles.progress}>Progression : {progress.en}%</p>
+          <button onClick={() => handleReset("en")} className={styles.resetButton}>
+            Réinitialiser
+          </button>
+        </div>
+        <div className={styles.languageContainer}>
+          <button onClick={() => handleLanguageSelect("fr")} className={styles.button}>
+            Français
+          </button>
+          <p className={styles.progress}>Progression : {progress.fr}%</p>
+          <button onClick={() => handleReset("fr")} className={styles.resetButton}>
+            Réinitialiser
+          </button>
+        </div>
       </div>
     </div>
   );
 };
-
 
 export default SelectLanguagePage;

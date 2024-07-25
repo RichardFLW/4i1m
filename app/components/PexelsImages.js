@@ -26,7 +26,7 @@ const PexelsImages = ({ language }) => {
 
   // Utilisation de useEffect pour charger l'état du jeu à partir du localStorage
   useEffect(() => {
-    const savedState = JSON.parse(localStorage.getItem('gameState'));
+    const savedState = JSON.parse(localStorage.getItem(`gameState-${language}`));
     if (savedState) {
       setCurrentIndex(savedState.currentIndex);
       setSearchQuery(words["en"][savedState.currentIndex]);
@@ -64,7 +64,7 @@ const PexelsImages = ({ language }) => {
       setIsSuccess(true);
       const nextIndex = (currentIndex + 1) % words[language].length;
       // Sauvegarder l'état du jeu dans le localStorage
-      localStorage.setItem('gameState', JSON.stringify({ currentIndex: nextIndex }));
+      localStorage.setItem(`gameState-${language}`, JSON.stringify({ currentIndex: nextIndex }));
       setCurrentIndex(nextIndex);
       setSearchQuery(words["en"][nextIndex]);
       setInputValues(Array(words[language][nextIndex].length).fill(""));

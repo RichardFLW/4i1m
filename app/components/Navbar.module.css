@@ -120,6 +120,7 @@
   cursor: pointer;
   padding: 0.5rem 1rem;
   border-radius: 9999px;
+  margin-left: 10px;
 }
 
 .restartButton:hover {

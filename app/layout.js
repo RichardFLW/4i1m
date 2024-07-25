@@ -1,3 +1,4 @@
+// app/layout.js
 import Navbar from "./components/Navbar";
 import "./globals.css";
 import { SpeedInsights } from "@vercel/speed-insights/next";

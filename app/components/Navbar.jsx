@@ -1,6 +1,6 @@
 // app/components/Navbar.jsx
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "./Navbar.module.css";
@@ -8,15 +8,6 @@ import styles from "./Navbar.module.css";
 const Navbar = () => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-  const [hasStarted, setHasStarted] = useState(false);
-
-  useEffect(() => {
-    // Vérifie si une série a été commencée en vérifiant le localStorage
-    const savedState = JSON.parse(localStorage.getItem('gameState'));
-    if (savedState) {
-      setHasStarted(true);
-    }
-  }, []);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -24,11 +15,6 @@ const Navbar = () => {
 
   const handleLinkClick = () => {
     setIsOpen(false);
-  };
-
-  const handleRestart = () => {
-    localStorage.removeItem('gameState');
-    window.location.reload();
   };
 
   return (
@@ -63,16 +49,6 @@ const Navbar = () => {
               Le Jeu
             </Link>
           </li>
-          {hasStarted && (
-            <li>
-              <button
-                className={`${styles.menuItem} ${styles.restartButton}`}
-                onClick={handleRestart}
-              >
-                Recommencer
-              </button>
-            </li>
-          )}
         </ul>
       </div>
     </nav>
