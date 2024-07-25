@@ -1,10 +1,10 @@
-/* app/component/PexelsImages/module*/
-
 .page {
   display: flex;
-  flex-wrap: wrap;
-  height: 90vh; 
-  width:100vw;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 90vh; /* Utiliser les 90vh restants */
+  overflow: hidden;
+  width: 100vw;
 }
 
 .imageContainer {
@@ -12,15 +12,16 @@
   flex-wrap: wrap;
   gap: 10px;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
   width: 100vw;
-  height: 45vh;
+  height: 45vh; /* Ajuster la hauteur pour que le contenu total soit 100vh */
+  overflow: hidden;
 }
 
 .imageWrapper {
   width: 300px; 
-  height: 30vh;  
-  overflow: hidden; 
+  height: 100%; /* Utiliser toute la hauteur disponible */
+  overflow: hidden;
   margin-top: 10px;
 }
 
@@ -28,12 +29,13 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 10px; 
+  border-radius: 10px;
 }
 
-.inputsAndKeyboard{
+.inputsAndKeyboard {
   width: 100vw;
-  height:42vh;
+  height: 45vh; /* Ajuster la hauteur pour que le contenu total soit 100vh */
+  overflow: hidden;
 }
 
 .title {
@@ -41,11 +43,9 @@
   font-weight: bold;
   text-align: center;
   color: black;
-  margin-bottom: 20px;
+  margin-bottom: 10px; /* Réduire la marge inférieure */
   margin-top: 10px;
 }
-
-
 
 .successMessage, .errorMessage {
   padding: 10px 20px;
@@ -68,19 +68,9 @@
   border: 1px solid #f5c6cb;
 }
 
-/* Media Query pour les écrans jusqu'à 1150px */
 @media (max-width: 1150px) {
-
-
   .imageWrapper {
     width: 45%; /* Deux images par ligne avec un petit espacement */
     height: 45%;
   }
-
-
-  
-  
 }
-
-
-
