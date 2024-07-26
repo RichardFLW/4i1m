@@ -4,7 +4,6 @@ const words = {
     "bread",
     "chair",
     "dance",
-    "earth",
     "fruit",
     "green",
     "house",
@@ -34,13 +33,13 @@ const words = {
     "butterfly",
     "eagle",
     "galaxy",
+
   ],
   fr: [
     "pomme",
     "pain",
     "chaise",
     "danse",
-    "terre",
     "fruit",
     "vert",
     "maison",
@@ -70,6 +69,7 @@ const words = {
     "papillon",
     "aigle",
     "galaxie",
+    
   ],
 };
 
