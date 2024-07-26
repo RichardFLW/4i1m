@@ -1,4 +1,4 @@
-// app/pages/jeu.js
+// app/jeu/page.js
 "use client";
 
 import React, { Suspense } from "react";

@@ -1,91 +1,87 @@
-// app/components/SelectLanguagePage.jsx
+// app/select-language/page.js
 "use client";
 
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./SelectLanguage.module.css";
-import ConfirmationModal from "../components/ConfirmationModal";
-import words from "../components/words";
+import Image from "next/image";
 
 const SelectLanguagePage = () => {
   const router = useRouter();
-  const [progress, setProgress] = useState({ en: 0, fr: 0 });
-  const [modalOpen, setModalOpen] = useState(false);
-  const [currentLanguage, setCurrentLanguage] = useState('');
-  const [flagSrc, setFlagSrc] = useState('');
+  const [progressEn, setProgressEn] = useState(0);
+  const [progressFr, setProgressFr] = useState(0);
 
   useEffect(() => {
-    const calculateProgress = (language) => {
-      const savedState = JSON.parse(localStorage.getItem(`gameState-${language}`));
-      if (savedState && savedState.currentIndex) {
-        return Math.round((savedState.currentIndex / words[language].length) * 100);
-      }
-      return 0;
-    };
+    const savedGameStateEn = localStorage.getItem("gameState-en");
+    const savedGameStateFr = localStorage.getItem("gameState-fr");
 
-    setProgress({
-      en: calculateProgress("en"),
-      fr: calculateProgress("fr"),
-    });
+    if (savedGameStateEn) {
+      const { currentIndex } = JSON.parse(savedGameStateEn);
+      setProgressEn(Math.floor((currentIndex / 17) * 100));
+    }
+
+    if (savedGameStateFr) {
+      const { currentIndex } = JSON.parse(savedGameStateFr);
+      setProgressFr(Math.floor((currentIndex / 17) * 100));
+    }
   }, []);
 
   const handleLanguageSelect = (language) => {
-    const savedState = JSON.parse(localStorage.getItem(`gameState-${language}`));
-    const currentIndex = savedState ? savedState.currentIndex : 0;
-    const queryParams = new URLSearchParams({ lang: language, index: currentIndex }).toString();
-    router.push(`/jeu?${queryParams}`);
+    const savedGameState = localStorage.getItem(`gameState-${language}`);
+    const currentIndex = savedGameState ? JSON.parse(savedGameState).currentIndex : 0;
+    router.push(`/jeu?lang=${language}&index=${currentIndex}`);
   };
 
-  const openModal = (language) => {
-    setCurrentLanguage(language);
-    setFlagSrc(language === 'en' ? '/flags/flag-gb.svg' : '/flags/flag-fr.svg');
-    setModalOpen(true);
-  };
-
-  const handleReset = () => {
-    localStorage.removeItem(`gameState-${currentLanguage}`);
-    setProgress((prev) => ({ ...prev, [currentLanguage]: 0 }));
-    setModalOpen(false);
-  };
-
-  const closeModal = () => {
-    setModalOpen(false);
+  const handleReset = (language) => {
+    localStorage.removeItem(`gameState-${language}`);
+    window.location.reload();
   };
 
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Je devine le mot en :</h1>
-      <div className={styles.buttons}>
-        <div className={styles.languageContainer}>
-          <button onClick={() => handleLanguageSelect("en")} className={styles.button}>
-            <img src="/flags/flag-gb.svg" alt="English" className={styles.flag} /> Anglais
-          </button>
-          <div className={styles.progressBarContainer}>
-            <div className={styles.progressBar} style={{ width: `${progress.en}%` }}></div>
+      <div className={styles.cardContainer}>
+        <div className={styles.card}>
+          <div className={styles.cardHeader}>
+            <Image src="/flags/flag-gb.svg" alt="Anglais" width={30} height={20} />
+            <h2 className={styles.cardTitle}>Anglais</h2>
           </div>
-          <button onClick={() => openModal("en")} className={styles.resetButton}>
+          <p className={styles.progressLabel}>Progression : {progressEn}%</p>
+          <div className={styles.progressBar}>
+            <div className={styles.progress} style={{ width: `${progressEn}%` }}></div>
+          </div>
+          <div className={styles.buttonContainer}>
+            <button onClick={() => handleLanguageSelect("en")} className={styles.button}>
+              <Image src="/icons/continue.svg" alt="Continuer" width={16} height={16} />
+              Continuer
+            </button>
+          </div>
+          <p className={styles.resetText} onClick={() => handleReset("en")}>
+            <Image src="/icons/reset.svg" alt="Réinitialiser" width={16} height={16} />
             Réinitialiser
-          </button>
+          </p>
         </div>
-        <div className={styles.languageContainer}>
-          <button onClick={() => handleLanguageSelect("fr")} className={styles.button}>
-            <img src="/flags/flag-fr.svg" alt="French" className={styles.flag} /> Français
-          </button>
-          <div className={styles.progressBarContainer}>
-            <div className={styles.progressBar} style={{ width: `${progress.fr}%` }}></div>
+        <div className={styles.card}>
+          <div className={styles.cardHeader}>
+            <Image src="/flags/flag-fr.svg" alt="Français" width={30} height={20} />
+            <h2 className={styles.cardTitle}>Français</h2>
           </div>
-          <button onClick={() => openModal("fr")} className={styles.resetButton}>
+          <p className={styles.progressLabel}>Progression : {progressFr}%</p>
+          <div className={styles.progressBar}>
+            <div className={styles.progress} style={{ width: `${progressFr}%` }}></div>
+          </div>
+          <div className={styles.buttonContainer}>
+            <button onClick={() => handleLanguageSelect("fr")} className={styles.button}>
+              <Image src="/icons/continue.svg" alt="Continuer" width={16} height={16} />
+              Continuer
+            </button>
+          </div>
+          <p className={styles.resetText} onClick={() => handleReset("fr")}>
+            <Image src="/icons/reset.svg" alt="Réinitialiser" width={16} height={16} />
             Réinitialiser
-          </button>
+          </p>
         </div>
       </div>
-      <ConfirmationModal
-        isOpen={modalOpen}
-        onClose={closeModal}
-        onConfirm={handleReset}
-        language={currentLanguage}
-        flagSrc={flagSrc}
-      />
     </div>
   );
 };

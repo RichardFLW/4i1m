@@ -1,4 +1,4 @@
-// app/pages/jeu.js
+// app/components/PexelsImages.js
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
