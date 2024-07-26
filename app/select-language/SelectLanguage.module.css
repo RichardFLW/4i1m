@@ -89,3 +89,29 @@
   background-color: #e04343;
   transform: translateY(-2px);
 }
+
+/* Media queries for responsiveness */
+@media (max-width: 600px) {
+  .title {
+    font-size: 1.5em;
+  }
+}
+
+@media (max-width: 400px) {
+  .title {
+    font-size: 1.2em;
+  }
+
+  .buttons {
+    gap: 20px;
+  }
+
+  .button {
+    padding: 8px 16px;
+    font-size: 1em;
+  }
+
+  .progressBarContainer {
+    width: 120px;
+  }
+}

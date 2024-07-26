@@ -1,49 +1,78 @@
+/* app/components/ResultModal.module.css */
 .modalOverlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000; /* Assurez-vous que la modal est au-dessus des autres éléments */
-  }
-  
-  .modal {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    text-align: center;
-  }
-  
-  .success {
-    border: 2px solid #4CAF50; /* Vert */
-  }
-  
-  .error {
-    border: 2px solid #f44336; /* Rouge */
-  }
-  
-  .modalTitle {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  .modalMessage {
-    font-size: 18px;
-    margin-bottom: 20px;
-  }
-  
-  .closeButton {
-    background-color: #008CBA; /* Bleu */
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+}
+
+.success {
+  border: 2px solid #4caf50;
+}
+
+.error {
+  border: 2px solid #f44336;
+}
+
+.modalTitle {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.modalMessage {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.closeButton {
+  background-color: #e0a644;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.closeButton:hover {
+  background-color: #d2943d;
+}
+
+.success .modalTitle,
+.success .closeButton {
+  background-color: #4caf50;
+  color: white;
+}
+
+.success .modalTitle {
+  color: white;
+}
+
+.error .modalTitle,
+.error .closeButton {
+  background-color: #f44336;
+  color: white;
+}
+
+.error .modalTitle {
+  color: white;
+}
