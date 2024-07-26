@@ -41,7 +41,13 @@ const Navbar = () => {
   return (
     <nav className={styles.navbar}>
       <div className={styles.navbarContent}>
-        <div className="text-lg font-bold">4 Images 1 Mot</div>
+        <div className={styles.logo}>
+          <span className="text-lg font-bold">4 Images 1 Mot</span>
+        </div>
+        <div className={styles.coinsContainer}>
+          <span className={styles.coinsCount}>{coins}</span>
+          <img src="/coin.svg" alt="Coins" className={styles.coinIcon} />
+        </div>
         <button
           onClick={toggleMenu}
           className={`${styles.menuButton} ${isOpen ? styles.open : ""}`}
@@ -51,31 +57,27 @@ const Navbar = () => {
           <div></div>
           <div></div>
         </button>
-        <ul className={`${styles.menuItems} ${isOpen ? styles.menuItemsOpen : ""}`}>
-          <li>
-            <Link
-              href="/"
-              className={`${styles.menuItem} ${pathname === "/" ? styles.menuItemActive : ""}`}
-              onClick={handleLinkClick}
-            >
-              Accueil
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/select-language"
-              className={`${styles.menuItem} ${pathname === "/select-language" ? styles.menuItemActive : ""}`}
-              onClick={handleLinkClick}
-            >
-              Le Jeu
-            </Link>
-          </li>
-        </ul>
-        <div className={styles.coinsContainer}>
-          <img src="/coin.svg" alt="Coins" className={styles.coinIcon} />
-          <span className={styles.coinsCount}>{coins}</span>
-        </div>
       </div>
+      <ul className={`${styles.menuItems} ${isOpen ? styles.menuItemsOpen : ""}`}>
+        <li>
+          <Link
+            href="/"
+            className={`${styles.menuItem} ${pathname === "/" ? styles.menuItemActive : ""}`}
+            onClick={handleLinkClick}
+          >
+            Accueil
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/select-language"
+            className={`${styles.menuItem} ${pathname === "/select-language" ? styles.menuItemActive : ""}`}
+            onClick={handleLinkClick}
+          >
+            Le Jeu
+          </Link>
+        </li>
+      </ul>
     </nav>
   );
 };

@@ -2,12 +2,13 @@
 .navbar {
   background: #282c34;
   color: white;
-  padding: 1rem;
+  padding: 0.5rem 1rem;
   height: 10vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: relative;
+  z-index: 20; /* Assurez-vous que la navbar est au-dessus des autres éléments */
 }
 
 .navbarContent {
@@ -20,6 +21,7 @@
 .logo {
   display: flex;
   align-items: center;
+  font-size: 1.5rem;
 }
 
 .menuButton {
@@ -67,45 +69,40 @@
   transform: translateY(50%) rotate(-45deg);
 }
 
-@media (min-width: 1024px) {
-  .menuButton {
-    display: none;
-  }
-}
-
 .menuItems {
   display: none;
   list-style: none;
   padding: 0;
   margin: 0;
-}
-
-@media (min-width: 1024px) {
-  .menuItems {
-    display: flex;
-    gap: 1rem;
-  }
+  flex-direction: column;
+  align-items: center;
 }
 
 .menuItemsOpen {
-  display: block;
-  position: absolute;
-  top: 3.2rem;
-  left: 0;
+  display: flex;
+  position: fixed; /* Utilisation de fixed pour s'assurer que le menu est au bon endroit */
+  top: 10vh; /* Définir la hauteur en dessous de la navbar */
+  right: 0;
   width: 100vw;
-  height: calc(100vh - 3.2rem);
-  background-color: white;
-  color: black;
+  height: calc(100vh - 10vh);
+  background-color: #282c34;
   padding: 1rem;
   z-index: 10;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
 }
 
 .menuItem {
-  display: flex;
-  align-items: center;
   padding: 0.5rem 1rem;
   border-radius: 9999px;
-  height: 5vh;
+  color: white;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.menuItem:hover {
+  background-color: #444;
 }
 
 .menuItemActive {
