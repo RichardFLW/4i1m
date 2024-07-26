@@ -109,20 +109,22 @@
 }
 
 .menuItemActive {
-  background-color: #E0A644;
+  background-color: #e0a644;
   color: black;
 }
 
-.restartButton {
-  background-color: #E0A644;
-  color: black;
-  border: none;
-  cursor: pointer;
-  padding: 0.5rem 1rem;
-  border-radius: 9999px;
-  margin-left: 10px;
+.coinsContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.restartButton:hover {
-  background-color: #cc8e39;
+.coinIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.coinsCount {
+  font-size: 1.2em;
+  color: #e0a644;
 }

@@ -1,6 +1,6 @@
 // app/components/Navbar.jsx
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "./Navbar.module.css";
@@ -8,6 +8,27 @@ import styles from "./Navbar.module.css";
 const Navbar = () => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const [coins, setCoins] = useState(0);
+
+  useEffect(() => {
+    const savedCoins = localStorage.getItem('coins');
+    if (savedCoins) {
+      setCoins(parseInt(savedCoins, 10));
+    }
+
+    const handleCoinsUpdated = () => {
+      const updatedCoins = localStorage.getItem('coins');
+      if (updatedCoins) {
+        setCoins(parseInt(updatedCoins, 10));
+      }
+    };
+
+    window.addEventListener('coinsUpdated', handleCoinsUpdated);
+
+    return () => {
+      window.removeEventListener('coinsUpdated', handleCoinsUpdated);
+    };
+  }, []);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -50,6 +71,10 @@ const Navbar = () => {
             </Link>
           </li>
         </ul>
+        <div className={styles.coinsContainer}>
+          <img src="/coin.svg" alt="Coins" className={styles.coinIcon} />
+          <span className={styles.coinsCount}>{coins}</span>
+        </div>
       </div>
     </nav>
   );
